@@ -1,3 +1,7 @@
+package day1;
+
+import common.Utils;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -5,9 +9,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Day1Part1 {
+public class Part2 {
     public static void main(String[] args) throws URISyntaxException, IOException {
-        part1("day1_part1.txt");
+        part1("day1_part2.txt");
     }
 
     private static void part1(String fileName) throws URISyntaxException, IOException {
@@ -21,16 +25,15 @@ public class Day1Part1 {
             rightList.add(Integer.valueOf(arr[1]));
         });
 
-        Collections.sort(leftList);
-        Collections.sort(rightList);
-
         System.out.println(leftList);
         System.out.println(rightList);
 
         AtomicInteger sum = new AtomicInteger(0);
         AtomicInteger counter = new AtomicInteger(0);
         leftList.forEach(num -> {
-            sum.getAndAdd(Math.abs(leftList.get(counter.get()) - rightList.get(counter.get())));
+            int elem = leftList.get(counter.get());
+            int freq = Collections.frequency(rightList, elem);
+            sum.getAndAdd(elem * freq);
             counter.getAndIncrement();
         });
 
